@@ -1,0 +1,82 @@
+<button *ngIf="isadmin" type="button" class="btn btn-link" (click)="getUsers()">Users Panel</button>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <div class="container">
+                <div class="row searchFilter" >
+                   <div class="col-sm-12" >
+                    <div class="input-group" >
+                     <input #searchBar [disabled]="(auxname=='No More')" id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
+                     <div class="input-group-btn" >
+                      <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="label-icon" >{{auxname}}</span> <span class="caret" >&nbsp;</span></button>
+                      <div class="dropdown-menu dropdown-menu-right" >
+                         <ul class="category_filters" >
+                            <li *ngFor="let cat of categories">
+                                <div *ngIf="!cat.used">
+                                    <input type="radio" name="radios" id="{{cat.name}}" value="{{cat.name}}" checked="{{cat.checked}}" (change)="changeOption($event)" ><label class="category-label" for="{{cat.name}}" >{{ cat.name }}</label>
+                                </div>
+                            </li>
+                         </ul>
+                      </div>
+                      <button id="searchBtn" type="button" class="btn btn-secondary btn-search" (click)="search(searchBar.value)" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
+                     </div>
+                    </div>
+                   </div>
+                </div>   
+            </div>
+        </td>
+        <td>
+            <select #orderBy class="browser-default custom-select" style="max-width:70%;" (change)="order()">
+                <option value="0" selected>Order By</option>
+                <option value="1">Rating / Ascendent</option>
+                <option value="2">Rating / Descendent</option>
+                <option value="3">Channel / Ascendent</option>
+                <option value="4">Channel / Descendent</option>
+                <option value="5">Genre / Ascendent</option>
+                <option value="6">Genre / Descendent</option>
+            </select>              
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+<div class="row justify-content-center" *ngIf="auxused>0">
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>searching for...</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cat of categories">
+                <td *ngIf="cat.used">{{cat.name}}:</td>
+                <td *ngIf="cat.used">{{cat.info}}</td>
+                <td *ngIf="cat.used"><button class="btn btn-link" (click)="deleteCat(cat.name)" > Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card-columns">
+    <div class="card" style="width: 20rem;" *ngFor="let item of payload?.result">
+      <img class="card-img-top" [src]="item.image?.medium" [alt]="item.name" />
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">
+          Broadcast by {{ item.network?.name }} on
+          {{ item.premiered | date: "medium" }}
+        </p>
+        <p class="card-text">rating: {{ item.rating?.average }} language: {{ item.language }}</p>
+        <p class="card-text">schedule: {{ item.schedule?.days }} {{ item.schedule?.time }}</p>
+        <hr>
+        <p class="card-text">
+          <small class="text-muted">{{ item.genres }}</small>
+        </p>
+      </div>
+    </div>
+  </div>
