@@ -1,0 +1,14 @@
+Getting all the users
+Updating user: adam
+Getting all the users
+Deleting userId: 3
+Saving user: luis123
+Getting all the users
+Deleting userId: 4
+Getting all the users
+Updating user: tom234
+Getting all the users
+Getting all the users
+Updating user: tom234
+Getting all the users
+Getting all the users
