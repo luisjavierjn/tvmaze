@@ -55,3 +55,7 @@ C:\Projects\tvmaze\src\main\webapp
 Shortcut de Chrome
 ------------------
 "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="C:/data"
+
+Youtube Video
+-------------
+https://youtu.be/CXpyWFIMS7Q
